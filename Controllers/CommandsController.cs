@@ -8,6 +8,8 @@ namespace TutorialAPI.Controllers
     public class CommandsController : ControllerBase
     {
         //Create an action result, maps to our crud methods and swagger
+       // an endpoint that will return a string
+        [HttpGet]
         public ActionResult<IEnumerable<string>> GetString()
         {
             return new string [] {"this", "is", "a", "placeholder"};
