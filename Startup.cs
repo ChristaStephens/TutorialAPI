@@ -31,6 +31,7 @@ namespace TutorialAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //tells the interface where to find the configuration for the database
+            //configuration has to match the json exactly, including spacing.
             services.AddDbContext<CommandContext>
                 (opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:Connection String"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

@@ -9,7 +9,7 @@ using TutorialAPI.Models;
 namespace TutorialAPI.Migrations
 {
     [DbContext(typeof(CommandContext))]
-    [Migration("20190822164407_AddCommandtoDB")]
+    [Migration("20190822171223_AddCommandtoDB")]
     partial class AddCommandtoDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
