@@ -32,7 +32,7 @@ namespace TutorialAPI
         {
             //tells the interface where to find the configuration for the database
             services.AddDbContext<CommandContext>
-                (opt => opt.UseSqlServer(Configuration["Data:CommandApiConnection:ConnectionString"]));
+                (opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:Connection String"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
