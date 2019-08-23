@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TutorialAPI.Models;
 
 namespace TutorialAPI.Controllers
 {
@@ -15,6 +16,26 @@ namespace TutorialAPI.Controllers
     [ApiController]
     public class CommandsController : ControllerBase
     {
+        //creating action results that will map to swagger
+        private readonly CommandContext _context;
+        //using constructor dependency injection to instantiate
+        //so we're setting _context to context in the constructor.
+        //context comes from our startup class when we registered our DB service.
+        //pretty much allows for usasge of info from startup
+        public CommandsController(CommandContext context)
+        {
+            _context = context;
+        }
+
+        //Get:      api/commands        endpoint
+        [HttpGet]
+        public ActionResult<IEnumerable<Command>> GetCommands()
+        {
+            return _context.CommandItems;
+        }
+
+        /*
+        same as above get request, but not hardcoded.
         //Create an action result, maps to our crud methods and swagger
         // an endpoint that will return a string
         [HttpGet]
@@ -22,5 +43,6 @@ namespace TutorialAPI.Controllers
         {
             return new string[] { "this", "is", "a", "placeholder" };
         }
+         */
     }
 }
