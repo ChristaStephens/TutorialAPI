@@ -21,7 +21,7 @@ namespace TutorialAPI.Controllers
         //using constructor dependency injection to instantiate
         //so we're setting _context to context in the constructor.
         //context comes from our startup class when we registered our DB service.
-        //pretty much allows for usasge of info from startup
+        //pretty much allows for usage of info from startup
         public CommandsController(CommandContext context)
         {
             _context = context;
@@ -34,15 +34,21 @@ namespace TutorialAPI.Controllers
             return _context.CommandItems;
         }
 
-        /*
-        same as above get request, but not hardcoded.
-        //Create an action result, maps to our crud methods and swagger
-        // an endpoint that will return a string
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> GetString()
+        //Get:      api/commands/1      endpoint
+        //expecting an id/number to be passed through the url
+        [HttpGet("{id}")]
+        public ActionResult<Command> GetCommandItem(int id)
         {
-            return new string[] { "this", "is", "a", "placeholder" };
+            var commandItem = _context.CommandItems.Find(id);
+
+            if(commandItem == null)
+            {
+                return NotFound();
+            }
+            return commandItem;
         }
-         */
+
+
+
     }
 }
