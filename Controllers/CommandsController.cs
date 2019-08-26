@@ -42,7 +42,7 @@ namespace TutorialAPI.Controllers
         {
             var commandItem = _context.CommandItems.Find(id);
 
-            if(commandItem == null)
+            if (commandItem == null)
             {
                 return NotFound();
             }
@@ -56,15 +56,15 @@ namespace TutorialAPI.Controllers
             _context.CommandItems.Add(command);
             _context.SaveChanges();
 
-            return CreatedAtAction("GetCommandItem", new Command{Id = command.Id}, command );
+            return CreatedAtAction("GetCommandItem", new Command { Id = command.Id }, command);
         }
 
 
-        //Put       api/commands/n      endpoint
+        //Put       api/commands/#      endpoint
         [HttpPut("{id}")]
         public ActionResult PutCommandItem(int id, Command command)
         {
-            if(id != command.Id)
+            if (id != command.Id)
             {
                 return BadRequest();
             }
@@ -72,6 +72,21 @@ namespace TutorialAPI.Controllers
             _context.Entry(command).State = EntityState.Modified;
             _context.SaveChanges();
             return NoContent();
+        }
+
+        //Delete    api/commands/#      endpoint
+        [HttpDelete("{id}")]
+        public ActionResult<Command> DeleteCommandItem(int id)
+        {
+            var commandItem = _context.CommandItems.Find(id);
+            if (commandItem == null)
+            {
+                return NotFound();
+            }
+            _context.CommandItems.Remove(commandItem);
+            _context.SaveChanges();
+
+            return commandItem;
         }
     }
 }
