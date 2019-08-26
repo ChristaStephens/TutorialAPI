@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TutorialAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TutorialAPI.Controllers
 {
@@ -58,5 +59,19 @@ namespace TutorialAPI.Controllers
             return CreatedAtAction("GetCommandItem", new Command{Id = command.Id}, command );
         }
 
+
+        //Put       api/commands/n      endpoint
+        [HttpPut("{id}")]
+        public ActionResult PutCommandItem(int id, Command command)
+        {
+            if(id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(command).State = EntityState.Modified;
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }
